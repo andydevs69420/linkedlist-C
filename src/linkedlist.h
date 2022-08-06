@@ -1,7 +1,7 @@
 /*
  | LinkedList implementation in C programming language.
  | author: andydevs69420
- | description: HLinkedList that handles integer as value.
+ | description: LinkedList that handles integer as value.
  | Copyright (C) andydevs69420 2022 All rights reserved.
  */
 
