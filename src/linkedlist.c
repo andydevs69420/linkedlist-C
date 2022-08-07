@@ -9,7 +9,14 @@
 #include "linkedlist.h"
 
 
-Node *new_LinkedList(int _value) {
+// @contructor
+/**
+ * @brief Creates new LinkedList Node.
+ * @param _value int value.
+ * @return Node* 
+ **/
+Node *new_LinkedList(int _value)
+{
     Node *head = (Node*) malloc(sizeof(Node));
         head->value = _value;
         head->head  = NULL;
@@ -17,8 +24,15 @@ Node *new_LinkedList(int _value) {
     return head;
 }
 
-
-Node *list_childNode(int _value, Node *_head, Node *_tail) {
+/**
+ * @brief Creates new LinkedList Node with head and value.
+ * @param _value integer value
+ * @param _head Node* head of linkedlist or root node.
+ * @param _tail Node* tail of node.
+ * @return Node* 
+ **/
+Node *list_childNode(int _value, Node *_head, Node *_tail)
+{
     Node *head = (Node*) malloc(sizeof(Node));
         head->value = _value;
         head->head  = _head;
@@ -26,7 +40,29 @@ Node *list_childNode(int _value, Node *_head, Node *_tail) {
     return head;
 }
 
-void append(Node *_head, int _value) {
+
+/**
+ * @brief Free mempry from head to last tail.
+ * @param _head Node* head of linkedlist or root node.
+ **/
+void freeNodes(Node *_head)
+{
+    Node *head_or_tail = _head;
+    while(head_or_tail != NULL)
+    {
+        free(head_or_tail);
+        head_or_tail = head_or_tail->tail;
+    }
+}
+
+
+/**
+ * @brief Appends new child node.
+ * @param _head Node* head of linkedlist or root node.
+ * @param _value int value.
+ **/
+void append(Node *_head, int _value)
+{
     Node *head_or_tail = _head;
     while (head_or_tail->tail != NULL)
         head_or_tail = head_or_tail->tail;
@@ -35,12 +71,37 @@ void append(Node *_head, int _value) {
 }
 
 
+/**
+ * @brief Sorts LinkedLit by value using bubble sort.
+ * @param _head Node* head of linkedlist or root node.
+ **/
+void sort_by_value(Node *_head)
+{
+    Node *_outer = _head, *_inner;
+    while(_outer != NULL)
+    {
+        _inner = _head;
+        while(_inner != NULL)
+        {
+            if (_inner->value > _outer->value)
+            {
+                int temp = _outer->value;
+                _outer->value = _inner->value;
+                _inner->value = temp;
+            }
+            _inner = _inner->tail;
+        }
+        _outer = _outer->tail;
+    }
+}
+
 #ifndef MINI_STR
 #define MINI_STR
 
 #define new_String()  \
     int str_size = 2; \
-    char *string = (char*) malloc(sizeof(char) * str_size);
+    char *string = (char*) malloc(sizeof(char) * str_size); \
+        string[0] = '\0';
 
 #define pushChar(_c)             \
     string[str_size - 2] = _c;   \
@@ -49,6 +110,12 @@ void append(Node *_head, int _value) {
 
 #endif
 
+
+/**
+ * @brief Converts integer to char*.
+ * @param __value__ int value to convert.
+ * @return char* 
+ **/
 char *itoa(int __value__)
 {
     char num[4096];
@@ -59,7 +126,13 @@ char *itoa(int __value__)
     return str_ptr;
 }
 
-char *toString(Node *_head) {
+/**
+ * @brief Formats LinkedList into array.
+ * @param _head Node* head of linkedlist or root node.
+ * @return char* 
+ **/
+char *toString(Node *_head)
+{
     new_String();
 
     pushChar('[');

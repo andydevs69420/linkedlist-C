@@ -28,7 +28,10 @@ typedef struct NODE {
 Node *new_LinkedList(int);
 Node *list_childNode(int, Node*, Node*);
 
+void freeNodes(Node*);
 void append(Node*, int);
+
+void sort_by_value(Node*);
 
 char *itoa(int);
 char *toString(Node*);
